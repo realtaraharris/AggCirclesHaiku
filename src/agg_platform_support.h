@@ -441,11 +441,6 @@ namespace agg {
         // implementations you may have simply an unresolved symbol when linking.
         void* raw_display_handler();
 
-        //--------------------------------------------------------------------
-        // display message box or print the message to the console 
-        // (depending on implementation)
-        void message(const char* msg);
-
     public:
         platform_specific* m_specific;
         ctrl_container m_ctrls;

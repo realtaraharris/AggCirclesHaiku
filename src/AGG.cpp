@@ -97,12 +97,7 @@ namespace agg {
         // be the frame buffer pointer with offset to the window top left
         return NULL;
     }
-    
-    void platform_support::message(const char* msg) {
-        BAlert* alert = new BAlert("AGG Message", msg, "Ok");
-        alert->Go(/*NULL*/);
-    }
-    
+
     bool platform_support::init(unsigned width, unsigned height, unsigned flags) {
         m_initial_width = width;
         m_initial_height = height;
