@@ -33,8 +33,6 @@
 // the responsibility of the implementation to create/delete it.
 // This class being defined in the implementation file can have 
 // any platform dependent stuff such as HWND, X11 Window and so on.
-//
-//----------------------------------------------------------------------------
 
 #ifndef AGG_PLATFORM_SUPPORT_INCLUDED
 #define AGG_PLATFORM_SUPPORT_INCLUDED
@@ -45,7 +43,7 @@
 #include "ctrl/agg_ctrl.h"
 
 namespace agg {
-    //----------------------------------------------------------window_flag_e
+    // window_flag_e
     // These are flags used in method init(). Not all of them are
     // applicable on different platforms, for example the win32_api
     // cannot use a hardware buffer (window_hw_buffer).
@@ -56,7 +54,7 @@ namespace agg {
         window_keep_aspect_ratio = 4,
     };
 
-    //-----------------------------------------------------------pix_format_e
+    // pix_format_e
     // Possible formats of the rendering buffer. Initially I thought that it's
     // reasonable to create the buffer and the rendering functions in 
     // accordance with the native pixel format of the system because it 
@@ -102,11 +100,11 @@ namespace agg {
         pix_format_argb64,         // A-R-G-B, native MAC format
         pix_format_abgr64,         // A-B-G-R, one byte per color component
         pix_format_bgra64,         // B-G-R-A, native win32 BMP format
-  
+
         end_of_pix_formats
     };
 
-    //-------------------------------------------------------------input_flag_e
+    // input_flag_e
 	// Mouse flags. They can be different on different platforms and the ways they are
 	// obtained are also different. But in any case the system dependent flags should
 	// be mapped into these ones. The meaning of that is as follows. They are also used
@@ -123,7 +121,6 @@ namespace agg {
         mouse_right = 2,
     };
 
-    //------------------------------------------------------------------------
     // A predeclaration of the platform dependent class. Since we do not
     // know anything here the only we can have is just a pointer to this
     // class as a data member. It should be created and destroyed explicitly
@@ -133,7 +130,7 @@ namespace agg {
     // anything about them and it's a perfect incapsulation :-)
     class platform_specific;
 
-    //----------------------------------------------------------ctrl_container
+    // ctrl_container
     // A helper class that contains pointers to a number of controls.
     // This class is used to ease the event handling with controls.
     // The implementation should simply call the appropriate methods
@@ -142,17 +139,14 @@ namespace agg {
         enum max_ctrl_e { max_ctrl = 64 };
 
     public:
-        //--------------------------------------------------------------------
         ctrl_container() : m_num_ctrl(0), m_cur_ctrl(-1) {}
 
-        //--------------------------------------------------------------------
         void add(ctrl& c) {
             if(m_num_ctrl < max_ctrl) {
                 m_ctrl[m_num_ctrl++] = &c;
             }
         }
 
-        //--------------------------------------------------------------------
         bool in_rect(double x, double y) {
             unsigned i;
             for(i = 0; i < m_num_ctrl; i++) {
@@ -161,7 +155,6 @@ namespace agg {
             return false;
         }
 
-        //--------------------------------------------------------------------
         bool on_mouse_button_down(double x, double y) {
             unsigned i;
             for(i = 0; i < m_num_ctrl; i++) {
@@ -170,7 +163,6 @@ namespace agg {
             return false;
         }
 
-        //--------------------------------------------------------------------
         bool on_mouse_button_up(double x, double y) {
             unsigned i;
             bool flag = false;
@@ -180,9 +172,7 @@ namespace agg {
             return flag;
         }
 
-        //--------------------------------------------------------------------
-        bool on_mouse_move(double x, double y, bool button_flag)
-        {
+        bool on_mouse_move(double x, double y, bool button_flag) {
             unsigned i;
             for(i = 0; i < m_num_ctrl; i++)
             {
@@ -191,7 +181,6 @@ namespace agg {
             return false;
         }
 
-        //--------------------------------------------------------------------
         bool set_cur(double x, double y) {
             unsigned i;
             for(i = 0; i < m_num_ctrl; i++) {
@@ -216,7 +205,7 @@ namespace agg {
         int           m_cur_ctrl;
     };
 
-    //---------------------------------------------------------platform_support
+    // platform_support
     // This class is a base one to the apllication classes. It can be used 
     // as follows:
     //
@@ -249,12 +238,10 @@ namespace agg {
     //  };
     //
     //
-    //  int agg_main(int argc, char* argv[])
-    //  {
+    //  int agg_main(int argc, char* argv[]) {
     //      the_application app(pix_format_rgb24, true);
     //
-    //      if(app.init(500, 400, agg::window_resize))
-    //      {
+    //      if(app.init(500, 400, agg::window_resize)) {
     //          return app.run();
     //      }
     //      return 1;
@@ -266,7 +253,7 @@ namespace agg {
     // stuff it's impossible to include SDL.h into the application files.
     // The demo applications are simple and their use is restricted, so, 
     // this approach is quite reasonable.
-    // 
+
     class platform_support {
     public:
         enum max_images_e { max_images = 16 };
@@ -276,7 +263,6 @@ namespace agg {
         platform_support(pix_format_e format, bool flip_y);
         virtual ~platform_support();
 
-        //--------------------------------------------------------------------
         // These 3 methods handle working with images. The image
         // formats are the simplest ones, such as .BMP in Windows or 
         // .ppm in Linux. In the applications the names of the files
@@ -289,7 +275,6 @@ namespace agg {
         bool save_img(unsigned idx, const char* file);
         bool create_img(unsigned idx, unsigned width=0, unsigned height=0);
 
-        //--------------------------------------------------------------------
         // init() and run(). See description before the class for details.
         // The necessity of calling init() after creation is that it's 
         // impossible to call the overridden virtual function (on_init()) 
@@ -298,15 +283,13 @@ namespace agg {
         // not yet displayed. The rbuf_window() method (see below) is 
         // accessible from on_init().
         bool init(unsigned width, unsigned height, unsigned flags);
-        int  run();
+        int run();
 
-        //--------------------------------------------------------------------
         // The very same parameters that were used in the constructor
         pix_format_e format() const { return m_format; }
         bool flip_y() const { return m_flip_y; }
         unsigned bpp() const { return m_bpp; }
 
-        //--------------------------------------------------------------------
         // These two functions control updating of the window. 
         // force_redraw() is an analog of the Win32 InvalidateRect() function.
         // Being called it sets a flag (or sends a message) which results
@@ -318,7 +301,6 @@ namespace agg {
         void force_redraw();
         void update_window();
 
-        //--------------------------------------------------------------------
         // So, finally, how to draw anythig with AGG? Very simple.
         // rbuf_window() returns a reference to the main rendering 
         // buffer which can be attached to any rendering class.
@@ -330,27 +312,23 @@ namespace agg {
         rendering_buffer& rbuf_window()          { return m_rbuf_window; }
         rendering_buffer& rbuf_img(unsigned idx) { return m_rbuf_img[idx]; }
 
-        //--------------------------------------------------------------------
         // Returns file extension used in the implementation for the particular
         // system.
         const char* img_ext() const;
 
-        //--------------------------------------------------------------------
         void copy_img_to_window(unsigned idx) {
             if(idx < max_images && rbuf_img(idx).buf()) {
                 rbuf_window().copy_from(rbuf_img(idx));
             }
         }
-        
-        //--------------------------------------------------------------------
+
         void copy_window_to_img(unsigned idx) {
             if(idx < max_images) {
                 create_img(idx, rbuf_window().width(), rbuf_window().height());
                 rbuf_img(idx).copy_from(rbuf_window());
             }
         }
-       
-        //--------------------------------------------------------------------
+
         void copy_img_to_img(unsigned idx_to, unsigned idx_from) {
             if(idx_from < max_images && 
                idx_to < max_images && 
@@ -362,7 +340,6 @@ namespace agg {
             }
         }
 
-        //--------------------------------------------------------------------
         // Event handlers. They are not pure functions, so you don't have
         // to override them all.
         // In my demo applications these functions are defined inside
@@ -382,7 +359,6 @@ namespace agg {
         virtual void on_draw();
         virtual void on_post_draw(void* raw_handler);
 
-        //--------------------------------------------------------------------
         // Adding control elements. A control element once added will be 
         // working and reacting to the mouse events. Still, you
         // will have to render them in the on_draw() using function 
@@ -394,7 +370,6 @@ namespace agg {
         // call ctrl::no_transform() after adding.
         void add_ctrl(ctrl& c) { m_ctrls.add(c); c.transform(m_resize_mtx); }
 
-        //--------------------------------------------------------------------
         // Auxiliary functions. trans_affine_resizing() modifier sets up the resizing 
         // matrix on the basis of the given width and height and the initial
         // width and height of the window. The implementation should simply 
@@ -431,7 +406,6 @@ namespace agg {
         double   initial_height() const { return m_initial_height; }
         unsigned window_flags() const { return m_window_flags; }
 
-        //--------------------------------------------------------------------
         // Get raw display handler depending on the system. 
         // For win32 its an HDC, for other systems it can be a pointer to some
         // structure. See the implementation files for detals.
