@@ -195,17 +195,6 @@ public:
         }
         force_redraw();
     }
-
-    virtual void on_mouse_button_down(int x, int y, unsigned flags) {
-        if(flags & agg::mouse_left) {
-            generate();
-            force_redraw();
-        }
-
-        if(flags & agg::mouse_right) {
-            wait_mode(!wait_mode());
-        }
-    }
 };
 
 int main(int argc, char* argv[]) {

@@ -17,21 +17,18 @@ public:
     virtual void            Draw(BRect updateRect);
     virtual void            FrameResized(float width, float height);
 
-    virtual void            KeyDown(const char* bytes, int32 numBytes);
-
     virtual void            MouseDown(BPoint where);
     virtual void            MouseMoved(BPoint where, uint32 transit, const BMessage* dragMesage);
     virtual void            MouseUp(BPoint where);
 
     BBitmap*        Bitmap() const;
 
-    uint8           LastKeyDown() const;
     uint32          MouseButtons();
 
     void            Update();
     void            ForceRedraw();
 
-    unsigned        GetKeyFlags();
+    unsigned        GetMouseFlags();
 
 private:
     BBitmap*                fBitmap;
@@ -43,8 +40,6 @@ private:
     uint32                  fMouseButtons;
     int32                   fMouseX;
     int32                   fMouseY;
-
-    uint8                   fLastKeyDown;
 
     bool                    fRedraw;
 

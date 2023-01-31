@@ -15,8 +15,6 @@ AGGView::AGGView(BRect frame, agg::platform_support* agg, agg::pix_format_e form
     fMouseX(-1),
     fMouseY(-1),
 
-    fLastKeyDown(0),
-
     fRedraw(true),
 
     fPulse(NULL),
@@ -161,49 +159,6 @@ void AGGView::FrameResized(float width, float height) {
     }
 }
 
-void AGGView::KeyDown(const char* bytes, int32 numBytes) {
-    if (bytes && numBytes > 0) {
-        fLastKeyDown = bytes[0];
-
-        bool left  = false;
-        bool up    = false;
-        bool right = false;
-        bool down  = false;
-
-        switch (fLastKeyDown) {
-        case B_LEFT_ARROW:
-            left = true;
-            break;
-
-        case B_UP_ARROW:
-            up = true;
-            break;
-
-        case B_RIGHT_ARROW:
-            right = true;
-            break;
-
-        case B_DOWN_ARROW:
-            down = true;
-            break;
-        }
-
-        /* case key_f2:
-        fAGG->copy_window_to_img(agg::platform_support::max_images - 1);
-        fAGG->save_img(agg::platform_support::max_images - 1, "screenshot");
-        break;
-        */
-
-        if (fAGG->m_ctrls.on_arrow_keys(left, right, down, up)) {
-            fAGG->on_ctrl_change();
-            fAGG->force_redraw();
-        } else {
-            fAGG->on_key(fMouseX, fMouseY, fLastKeyDown, GetKeyFlags());
-        }
-            // fAGG->on_key(fMouseX, fMouseY, fLastKeyDown, GetKeyFlags());
-    }
-}
-
 void AGGView::MouseDown(BPoint where) {
     BMessage* currentMessage = Window()->CurrentMessage();
     if (currentMessage) {
@@ -231,12 +186,12 @@ void AGGView::MouseDown(BPoint where) {
                     fAGG->force_redraw();
                 }
             } else {
-                fAGG->on_mouse_button_down(fMouseX, fMouseY, GetKeyFlags());
+                fAGG->on_mouse_button_down(fMouseX, fMouseY, GetMouseFlags());
             }
         }
     } else if (fMouseButtons & B_SECONDARY_MOUSE_BUTTON) {
         // right mouse button -> simple
-        fAGG->on_mouse_button_down(fMouseX, fMouseY, GetKeyFlags());
+        fAGG->on_mouse_button_down(fMouseX, fMouseY, GetMouseFlags());
     }
     SetMouseEventMask(B_POINTER_EVENTS, B_LOCK_WINDOW_FOCUS);
 }
@@ -258,12 +213,12 @@ void AGGView::MouseMoved(BPoint where, uint32 transit, const BMessage* dragMesag
 
     // pass the event on to AGG
     if (fAGG->m_ctrls.on_mouse_move(fMouseX, fMouseY,
-                                    (GetKeyFlags() & agg::mouse_left) != 0)) {
+                                    (GetMouseFlags() & agg::mouse_left) != 0)) {
         fAGG->on_ctrl_change();
         fAGG->force_redraw();
     } else {
         if (!fAGG->m_ctrls.in_rect(fMouseX, fMouseY)) {
-            fAGG->on_mouse_move(fMouseX, fMouseY, GetKeyFlags());
+            fAGG->on_mouse_move(fMouseX, fMouseY, GetMouseFlags());
         }
     }
 }
@@ -280,20 +235,16 @@ void AGGView::MouseUp(BPoint where) {
             fAGG->on_ctrl_change();
             fAGG->force_redraw();
         }
-        fAGG->on_mouse_button_up(fMouseX, fMouseY, GetKeyFlags());
+        fAGG->on_mouse_button_up(fMouseX, fMouseY, GetMouseFlags());
     } else if (fMouseButtons == B_SECONDARY_MOUSE_BUTTON) {
         fMouseButtons = 0;
 
-        fAGG->on_mouse_button_up(fMouseX, fMouseY, GetKeyFlags());
+        fAGG->on_mouse_button_up(fMouseX, fMouseY, GetMouseFlags());
     }
 }
 
 BBitmap* AGGView::Bitmap() const {
     return fBitmap;
-}
-
-uint8 AGGView::LastKeyDown() const {
-    return fLastKeyDown;
 }
 
 uint32 AGGView::MouseButtons() {
@@ -323,7 +274,7 @@ void AGGView::ForceRedraw() {
     }
 }
 
-unsigned AGGView::GetKeyFlags() {
+unsigned AGGView::GetMouseFlags() {
     uint32 buttons = fMouseButtons;
     uint32 mods = modifiers();
     unsigned flags = 0;
@@ -333,11 +284,6 @@ unsigned AGGView::GetKeyFlags() {
     if (buttons & B_SECONDARY_MOUSE_BUTTON) {
         flags |= agg::mouse_right;
     }
-    if (mods & B_SHIFT_KEY) {
-        flags |= agg::kbd_shift;
-    }
-    if (mods & B_COMMAND_KEY) {
-        flags |= agg::kbd_ctrl;
-    }
+
     return flags;
 }

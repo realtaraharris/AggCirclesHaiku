@@ -4,8 +4,8 @@
 // interactive demo examples. Since the examples should not be too complex
 // this class is provided to support some very basic interactive graphical
 // funtionality, such as putting the rendered image to the window, simple 
-// keyboard and mouse input, window resizing, setting the window title,
-// and catching the "idle" events.
+// mouse input, window resizing, setting the window title, and catching
+// the "idle" events.
 // 
 // The idea is to have a single header file that does not depend on any 
 // platform (I hate these endless #ifdef/#elif/#elif.../#endif) and a number
@@ -54,7 +54,6 @@ namespace agg {
         window_resize            = 1,
         window_hw_buffer         = 2,
         window_keep_aspect_ratio = 4,
-        window_process_all_keys  = 8
     };
 
     //-----------------------------------------------------------pix_format_e
@@ -108,106 +107,20 @@ namespace agg {
     };
 
     //-------------------------------------------------------------input_flag_e
-    // Mouse and keyboard flags. They can be different on different platforms
-    // and the ways they are obtained are also different. But in any case
-    // the system dependent flags should be mapped into these ones. The meaning
-    // of that is as follows. For example, if kbd_ctrl is set it means that the 
-    // ctrl key is pressed and being held at the moment. They are also used in 
-    // the overridden methods such as on_mouse_move(), on_mouse_button_down(),
-    // on_mouse_button_dbl_click(), on_mouse_button_up(), on_key(). 
-    // In the method on_mouse_button_up() the mouse flags have different
-    // meaning. They mean that the respective button is being released, but
-    // the meaning of the keyboard flags remains the same.
-    // There's absolut minimal set of flags is used because they'll be most
-    // probably supported on different platforms. Even the mouse_right flag
-    // is restricted because Mac's mice have only one button, but AFAIK
-    // it can be simulated with holding a special key on the keydoard.
+	// Mouse flags. They can be different on different platforms and the ways they are
+	// obtained are also different. But in any case the system dependent flags should
+	// be mapped into these ones. The meaning of that is as follows. They are also used
+	// in the overridden methods such as on_mouse_move(), on_mouse_button_down(),
+	// on_mouse_button_dbl_click(), on_mouse_button_up(). In the method
+	// on_mouse_button_up() the mouse flags have different meaning. They mean that the
+	// respective button is being released, but the meaning of the flags remains the
+	// same. There's absolut minimal set of flags is used because they'll be most
+	// probably supported on different platforms. Even the mouse_right flag is
+	// restricted because Mac mice have only one button, but AFAIK it can be simulated
+	// with holding a special key on the keydoard.
     enum input_flag_e {
         mouse_left  = 1,
         mouse_right = 2,
-        kbd_shift   = 4,
-        kbd_ctrl    = 8
-    };
-
-    //--------------------------------------------------------------key_code_e
-    // Keyboard codes. There's also a restricted set of codes that are most 
-    // probably supported on different platforms. Any platform dependent codes
-    // should be converted into these ones. There're only those codes are
-    // defined that cannot be represented as printable ASCII-characters. 
-    // All printable ASCII-set can be used in a regular C/C++ manner: 
-    // ' ', 'A', '0' '+' and so on.
-    // Since the class is used for creating very simple demo-applications
-    // we don't need very rich possibilities here, just basic ones. 
-    // Actually the numeric key codes are taken from the SDL library, so,
-    // the implementation of the SDL support does not require any mapping.
-    enum key_code_e {
-        // ASCII set. Should be supported everywhere
-        key_backspace      = 8,
-        key_tab            = 9,
-        key_clear          = 12,
-        key_return         = 13,
-        key_pause          = 19,
-        key_escape         = 27,
-
-        // Keypad 
-        key_delete         = 127,
-        key_kp0            = 256,
-        key_kp1            = 257,
-        key_kp2            = 258,
-        key_kp3            = 259,
-        key_kp4            = 260,
-        key_kp5            = 261,
-        key_kp6            = 262,
-        key_kp7            = 263,
-        key_kp8            = 264,
-        key_kp9            = 265,
-        key_kp_period      = 266,
-        key_kp_divide      = 267,
-        key_kp_multiply    = 268,
-        key_kp_minus       = 269,
-        key_kp_plus        = 270,
-        key_kp_enter       = 271,
-        key_kp_equals      = 272,
-
-        // Arrow-keys and stuff
-        key_up             = 273,
-        key_down           = 274,
-        key_right          = 275,
-        key_left           = 276,
-        key_insert         = 277,
-        key_home           = 278,
-        key_end            = 279,
-        key_page_up        = 280,
-        key_page_down      = 281,
-
-        // Functional keys. You'd better avoid using
-        // f11...f15 in your applications if you want 
-        // the applications to be portable
-        key_f1             = 282,
-        key_f2             = 283,
-        key_f3             = 284,
-        key_f4             = 285,
-        key_f5             = 286,
-        key_f6             = 287,
-        key_f7             = 288,
-        key_f8             = 289,
-        key_f9             = 290,
-        key_f10            = 291,
-        key_f11            = 292,
-        key_f12            = 293,
-        key_f13            = 294,
-        key_f14            = 295,
-        key_f15            = 296,
-
-        // The possibility of using these keys is 
-        // very restricted. Actually it's guaranteed 
-        // only in win32_api and win32_sdl implementations
-        key_numlock        = 300,
-        key_capslock       = 301,
-        key_scrollock      = 302,
-
-        // Phew!
-        end_of_key_codes
     };
 
     //------------------------------------------------------------------------
@@ -274,14 +187,6 @@ namespace agg {
             for(i = 0; i < m_num_ctrl; i++)
             {
                 if(m_ctrl[i]->on_mouse_move(x, y, button_flag)) return true;
-            }
-            return false;
-        }
-
-        //--------------------------------------------------------------------
-        bool on_arrow_keys(bool left, bool right, bool down, bool up) {
-            if(m_cur_ctrl >= 0) {
-                return m_ctrl[m_cur_ctrl]->on_arrow_keys(left, right, down, up);
             }
             return false;
         }
@@ -490,14 +395,13 @@ namespace agg {
         virtual void on_mouse_move(int x, int y, unsigned flags);
         virtual void on_mouse_button_down(int x, int y, unsigned flags);
         virtual void on_mouse_button_up(int x, int y, unsigned flags);
-        virtual void on_key(int x, int y, unsigned key, unsigned flags);
         virtual void on_ctrl_change();
         virtual void on_draw();
         virtual void on_post_draw(void* raw_handler);
 
         //--------------------------------------------------------------------
         // Adding control elements. A control element once added will be 
-        // working and reacting to the mouse and keyboard events. Still, you
+        // working and reacting to the mouse events. Still, you
         // will have to render them in the on_draw() using function 
         // render_ctrl() because platform_support doesn't know anything about 
         // renderers you use. The controls will be also scaled automatically 

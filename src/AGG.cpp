@@ -300,7 +300,6 @@ namespace agg {
     void platform_support::on_mouse_move(int x, int y, unsigned flags) {}
     void platform_support::on_mouse_button_down(int x, int y, unsigned flags) {}
     void platform_support::on_mouse_button_up(int x, int y, unsigned flags) {}
-    void platform_support::on_key(int x, int y, unsigned key, unsigned flags) {}
     void platform_support::on_ctrl_change() {}
     void platform_support::on_draw() {}
     void platform_support::on_post_draw(void* raw_handler) {}
