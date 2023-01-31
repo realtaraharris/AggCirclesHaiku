@@ -87,19 +87,12 @@ namespace agg {
         m_wait_mode(true),
         m_flip_y(flip_y),
         m_initial_width(10),
-        m_initial_height(10) {
-        strcpy(m_caption, "Anti-Grain Geometry Application");
-    }
+        m_initial_height(10) { }
     
     platform_support::~platform_support() {
         delete m_specific;
     }
 
-    void platform_support::caption(const char* cap) {
-        strcpy(m_caption, cap);
-        m_specific->SetTitle(cap);
-    }
-    
     void* platform_support::raw_display_handler() {
         // TODO: if we ever support BDirectWindow here, that would
         // be the frame buffer pointer with offset to the window top left

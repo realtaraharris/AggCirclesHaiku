@@ -206,7 +206,6 @@ int main(int argc, char* argv[]) {
     }
 
     the_application app(pix_format, flip_y, num_points);
-    app.caption("AGG Drawing random circles - A scatter plot prototype");
 
     if(app.init(start_width, start_height, agg::window_resize | agg::window_keep_aspect_ratio)) {
         return app.run();

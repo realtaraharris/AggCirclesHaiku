@@ -252,7 +252,6 @@ namespace agg {
     //  int agg_main(int argc, char* argv[])
     //  {
     //      the_application app(pix_format_rgb24, true);
-    //      app.caption("AGG Example. Lion");
     //
     //      if(app.init(500, 400, agg::window_resize))
     //      {
@@ -276,12 +275,6 @@ namespace agg {
         // flip_y - true if you want to have the Y-axis flipped vertically.
         platform_support(pix_format_e format, bool flip_y);
         virtual ~platform_support();
-
-        // Setting the windows caption (title). Should be able
-        // to be called at least before calling init(). 
-        // It's perfect if they can be called anytime.
-        void        caption(const char* cap);
-        const char* caption() const { return m_caption; }
 
         //--------------------------------------------------------------------
         // These 3 methods handle working with images. The image
@@ -481,7 +474,6 @@ namespace agg {
         unsigned         m_window_flags;
         bool             m_wait_mode;
         bool             m_flip_y;
-        char             m_caption[256];
         int              m_initial_width;
         int              m_initial_height;
         trans_affine     m_resize_mtx;
