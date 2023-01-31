@@ -1,6 +1,8 @@
 #ifndef PLATFORMSUPPORT_H
 #define PLATFORMSUPPORT_H
 
+#include "PixelFormats.h"
+
     // platform_support
     // This class is a base one to the apllication classes. It can be used 
     // as follows:
