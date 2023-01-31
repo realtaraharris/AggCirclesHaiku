@@ -10,7 +10,7 @@
 #include "agg_renderer_scanline.h"
 #include "ctrl/agg_slider_ctrl.h"
 #include "ctrl/agg_scale_ctrl.h"
-#include "platform/agg_platform_support.h"
+#include "agg_platform_support.h"
 
 #define AGG_BGR24
 //#define AGG_RGB24

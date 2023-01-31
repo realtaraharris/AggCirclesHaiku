@@ -3,7 +3,7 @@
 
 #include <MessageRunner.h>
 #include <View.h>
-#include "platform/agg_platform_support.h"
+#include "agg_platform_support.h"
 
 class AGGView : public BView {
 public:
