@@ -55,22 +55,6 @@ namespace agg {
         window_keep_aspect_ratio = 4,
     };
 
-	// Mouse flags. They can be different on different platforms and the ways they are
-	// obtained are also different. But in any case the system dependent flags should
-	// be mapped into these ones. The meaning of that is as follows. They are also used
-	// in the overridden methods such as on_mouse_move(), on_mouse_button_down(),
-	// on_mouse_button_dbl_click(), on_mouse_button_up(). In the method
-	// on_mouse_button_up() the mouse flags have different meaning. They mean that the
-	// respective button is being released, but the meaning of the flags remains the
-	// same. There's absolut minimal set of flags is used because they'll be most
-	// probably supported on different platforms. Even the mouse_right flag is
-	// restricted because Mac mice have only one button, but AFAIK it can be simulated
-	// with holding a special key on the keydoard.
-    enum input_flag_e {
-        mouse_left  = 1,
-        mouse_right = 2,
-    };
-
     // A predeclaration of the platform dependent class. Since we do not
     // know anything here the only we can have is just a pointer to this
     // class as a data member. It should be created and destroyed explicitly

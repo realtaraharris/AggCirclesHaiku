@@ -5,6 +5,11 @@
 #include "AGGView.h"
 #include "Util.h"
 
+enum input_flag_e {
+    mouse_left  = 1,
+    mouse_right = 2,
+};
+
 AGGView::AGGView(BRect frame, agg::platform_support* agg, agg::pix_format_e format, bool flipY) : BView(frame, "AGG View", B_FOLLOW_ALL, B_FRAME_EVENTS | B_WILL_DRAW),
     fFormat(format),
     fFlipY(flipY),
@@ -209,7 +214,7 @@ void AGGView::MouseMoved(BPoint where, uint32 transit, const BMessage* dragMesag
 
     // pass the event on to AGG
     if (fAGG->m_ctrls.on_mouse_move(fMouseX, fMouseY,
-                                    (GetMouseFlags() & agg::mouse_left) != 0)) {
+                                    (GetMouseFlags() & mouse_left) != 0)) {
         fAGG->on_ctrl_change();
         fAGG->force_redraw();
     } else {
@@ -275,10 +280,10 @@ unsigned AGGView::GetMouseFlags() {
     uint32 mods = modifiers();
     unsigned flags = 0;
     if (buttons & B_PRIMARY_MOUSE_BUTTON) {
-        flags |= agg::mouse_left;
+        flags |= mouse_left;
     }
     if (buttons & B_SECONDARY_MOUSE_BUTTON) {
-        flags |= agg::mouse_right;
+        flags |= mouse_right;
     }
 
     return flags;
