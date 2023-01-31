@@ -5,6 +5,8 @@
 #include <View.h>
 #include "agg_platform_support.h"
 
+#include "PlatformSupport.h"
+
 class AGGView : public BView {
 public:
     AGGView(BRect frame, agg::platform_support* agg, agg::pix_format_e format, bool flipY);

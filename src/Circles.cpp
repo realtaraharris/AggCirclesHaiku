@@ -22,6 +22,8 @@
 //#define AGG_RGB555
 #include "PixelFormats.h"
 
+#include "PlatformSupport.h"
+
 enum flip_y_e { flip_y = true };
 enum default_num_points_e { default_num_points = 10000 };
 
