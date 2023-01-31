@@ -84,7 +84,6 @@ namespace agg {
         m_format(format),
         m_bpp(32/*m_specific->m_bpp*/),
         m_window_flags(0),
-        m_wait_mode(true),
         m_flip_y(flip_y),
         m_initial_width(10),
         m_initial_height(10) { }

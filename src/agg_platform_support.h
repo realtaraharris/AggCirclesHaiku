@@ -307,16 +307,6 @@ namespace agg {
         unsigned bpp() const { return m_bpp; }
 
         //--------------------------------------------------------------------
-        // The following provides a very simple mechanism of doing someting
-        // in background. It's not multithreading. When wait_mode is true
-        // the class waits for the events and it does not ever call on_idle().
-        // When it's false it calls on_idle() when the event queue is empty.
-        // The mode can be changed anytime. This mechanism is satisfactory
-        // to create very simple animations.
-        bool wait_mode() const { return m_wait_mode; }
-        void wait_mode(bool wait_mode) { m_wait_mode = wait_mode; }
-
-        //--------------------------------------------------------------------
         // These two functions control updating of the window. 
         // force_redraw() is an analog of the Win32 InvalidateRect() function.
         // Being called it sets a flag (or sends a message) which results
@@ -472,7 +462,6 @@ namespace agg {
         rendering_buffer m_rbuf_window;
         rendering_buffer m_rbuf_img[max_images];
         unsigned         m_window_flags;
-        bool             m_wait_mode;
         bool             m_flip_y;
         int              m_initial_width;
         int              m_initial_height;

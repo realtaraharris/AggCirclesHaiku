@@ -63,9 +63,7 @@ void AGGView::MessageReceived(BMessage* message) {
         // drop messages that have piled up
         if (/*now - fLastPulse > 30000*/fEnableTicks) {
             fLastPulse = now;
-            if (!fAGG->wait_mode()) {
-                fAGG->on_idle();
-            }
+            fAGG->on_idle();
             Window()->PostMessage('entk', this);
             fEnableTicks = false;
         } else {
@@ -76,9 +74,7 @@ void AGGView::MessageReceived(BMessage* message) {
         fEnableTicks = true;
         if (now - fLastPulse > 30000) {
             fLastPulse = now;
-            if (!fAGG->wait_mode()) {
-                fAGG->on_idle();
-            }
+            fAGG->on_idle();
         }
         break;
     default:
