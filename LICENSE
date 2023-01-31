@@ -1,0 +1,86 @@
+Anti-Grain Geometry Public License
+
+Anti-Grain Geometry - Version 2.4
+Copyright (C) 2002-2004 Maxim Shemanarev (McSeem)
+
+Permission to copy, use, modify, sell and distribute this software is granted
+provided this copyright notice appears in all copies. This software is provided
+as-is without express or implied warranty, and with no claim as to its
+suitability for any purpose.
+
+Modified BSD License
+
+Anti-Grain Geometry - Version 2.4 
+Copyright (C) 2002-2005 Maxim Shemanarev (McSeem) 
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation and/or
+other materials provided with the distribution.
+
+3. The name of the author may not be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AS-IS AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGE.
+
+Please mention the authors in any work derived from Anti-Grain Geometry.
+
+General Polygon Clipper (GPC) License
+
+Anti-Grain Geometry distribution package includes General Polygon Clipper (GPC)
+by Alan Murta. GPC has a different kind of license that allows you to use Alan's
+work for free only in non-commercial software. Below is the full text of it.
+
+           http://www.cs.man.ac.uk/aig/staff/alan/software/
+
+Author:    Alan Murta (email: gpc@cs.man.ac.uk)
+Version:   2.31
+Date:      4th June 1999
+
+Copyright: (C) 1997-1999, Advanced Interfaces Group,
+           University of Manchester.
+
+           This software is free for non-commercial use. It may be copied,
+           modified, and redistributed provided that this copyright notice
+           is preserved on all copies. The intellectual property rights of
+           the algorithms used reside with the University of Manchester
+           Advanced Interfaces Group.
+
+           You may not use this software, in whole or in part, in support
+           of any commercial product without the express consent of the
+           author.
+
+           There is no warranty or other guarantee of fitness of this
+           software for any purpose. It is provided solely as-is.
+
+However GPC is not an obligatory part of AGG and can be easily removed. You just
+don't copy (or remove) agg2/gpc/* and you can also remove
+agg2/include/agg_conv_gpc.h in case if the GPC license does not allow you to use
+it.
+
+GPC is a General Polygon Clipper that performs boolean operations on polygons
+(poly-polygons to be exact). In AGG you can get the same visual result using
+Scanline Boolean Algebra. It operates with scanline shapes and in average works
+5-10 times faster than GPC. See:
+Demo scanline_boolean.cpp
+Demo scanline_boolean2.cpp
+
+You need GPC if you really really want to have vector data in the ouput. For
+screen graphics of any kind, Scanline Boolean Algebra is quite a good
+replacement.
+
+Copyright 2002-2006 Maxim Shemanarev

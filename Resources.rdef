@@ -1,0 +1,15 @@
+resource app_signature "application/x-vnd.dw-TestApp";
+
+resource app_flags B_MULTIPLE_LAUNCH;
+
+resource app_version {
+	major  = 0,
+	middle = 0,
+	minor  = 0,
+
+	variety = B_APPV_DEVELOPMENT,
+	internal = 0,
+
+	short_info = "AGG Circles Example",
+	long_info = "Anti-Grain Geometry Circles Example for Haiku"
+};
