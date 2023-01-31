@@ -208,7 +208,7 @@ public:
     }
 };
 
-int agg_main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
     unsigned num_points = default_num_points;
     if(argc > 1) {
         num_points = atoi(argv[1]);
