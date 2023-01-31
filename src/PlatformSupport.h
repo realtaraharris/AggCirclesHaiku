@@ -3,56 +3,66 @@
 
 #include "PixelFormats.h"
 
-    // platform_support
-    // This class is a base one to the apllication classes. It can be used 
-    // as follows:
-    //
-    //  class the_application : public agg::platform_support
-    //  {
-    //  public:
-    //      the_application(unsigned bpp, bool flip_y) :
-    //          platform_support(bpp, flip_y) 
-    //      . . .
-    //
-    //      //override stuff . . .
-    //      virtual void on_init()
-    //      {
-    //         . . .
-    //      }
-    //
-    //      virtual void on_draw()
-    //      {
-    //          . . .
-    //      }
-    //
-    //      virtual void on_resize(int sx, int sy)
-    //      {
-    //          . . .
-    //      }
-    //      // . . . and so on, see virtual functions
-    //
-    //
-    //      //any your own stuff . . .
-    //  };
-    //
-    //
-    //  int agg_main(int argc, char* argv[]) {
-    //      the_application app(pix_format_rgb24, true);
-    //
-    //      if(app.init(500, 400, agg::window_resize)) {
-    //          return app.run();
-    //      }
-    //      return 1;
-    //  }
-    //
-    // The reason to have agg_main() instead of just main() is that SDL
-    // for Windows requires including SDL.h if you define main(). Since
-    // the demo applications cannot rely on any platform/library specific
-    // stuff it's impossible to include SDL.h into the application files.
-    // The demo applications are simple and their use is restricted, so, 
-    // this approach is quite reasonable.
+// platform_support
+// This class is a base one to the apllication classes. It can be used
+// as follows:
+//
+//  class the_application : public agg::platform_support
+//  {
+//  public:
+//      the_application(unsigned bpp, bool flip_y) :
+//          platform_support(bpp, flip_y)
+//      . . .
+//
+//      //override stuff . . .
+//      virtual void on_init()
+//      {
+//         . . .
+//      }
+//
+//      virtual void on_draw()
+//      {
+//          . . .
+//      }
+//
+//      virtual void on_resize(int sx, int sy)
+//      {
+//          . . .
+//      }
+//      // . . . and so on, see virtual functions
+//
+//
+//      //any your own stuff . . .
+//  };
+//
+//
+//  int agg_main(int argc, char* argv[]) {
+//      the_application app(pix_format_rgb24, true);
+//
+//      if(app.init(500, 400, agg::window_resize)) {
+//          return app.run();
+//      }
+//      return 1;
+//  }
+//
+// The reason to have agg_main() instead of just main() is that SDL
+// for Windows requires including SDL.h if you define main(). Since
+// the demo applications cannot rely on any platform/library specific
+// stuff it's impossible to include SDL.h into the application files.
+// The demo applications are simple and their use is restricted, so
+// this approach is quite reasonable.
 
 namespace agg {
+    // These are flags used in method init(). Not all of them are
+    // applicable on different platforms, for example the win32_api
+    // cannot use a hardware buffer (window_hw_buffer).
+    // The implementation should simply ignore unsupported flags.
+    enum window_flag_e {
+        window_resize            = 1,
+        window_hw_buffer         = 2,
+        window_keep_aspect_ratio = 4,
+    };
+
     class platform_support {
     public:
         enum max_images_e { max_images = 16 };

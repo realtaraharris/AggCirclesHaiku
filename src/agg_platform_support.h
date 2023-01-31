@@ -45,16 +45,6 @@
 #include "CtrlContainer.h"
 
 namespace agg {
-    // These are flags used in method init(). Not all of them are
-    // applicable on different platforms, for example the win32_api
-    // cannot use a hardware buffer (window_hw_buffer).
-    // The implementation should simply ignore unsupported flags.
-    enum window_flag_e {
-        window_resize            = 1,
-        window_hw_buffer         = 2,
-        window_keep_aspect_ratio = 4,
-    };
-
     // A predeclaration of the platform dependent class. Since we do not
     // know anything here the only we can have is just a pointer to this
     // class as a data member. It should be created and destroyed explicitly
