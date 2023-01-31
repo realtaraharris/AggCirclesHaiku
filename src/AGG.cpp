@@ -100,14 +100,6 @@ namespace agg {
         m_specific->SetTitle(cap);
     }
     
-    void platform_support::start_timer() {
-        m_specific->StartTimer();
-    }
-    
-    double platform_support::elapsed_time() const {
-        return m_specific->ElapsedTime();
-    }
-    
     void* platform_support::raw_display_handler() {
         // TODO: if we ever support BDirectWindow here, that would
         // be the frame buffer pointer with offset to the window top left
@@ -139,12 +131,7 @@ namespace agg {
     const char* platform_support::img_ext() const {
         return ".ppm";
     }
-    
-    const char* platform_support::full_file_name(const char* file_name) {
-        sprintf(m_specific->fFilePath, "%s/%s", m_specific->fAppPath, file_name);
-        return m_specific->fFilePath;
-    }
-    
+
     bool platform_support::load_img(unsigned idx, const char* file) {
         if (idx < max_images) {
             char path[B_PATH_NAME_LENGTH];
@@ -254,7 +241,7 @@ namespace agg {
                 return true;
     
             } else {
-                fprintf(stderr, "failed to load bitmap: '%s'\n", full_file_name(file));
+                fprintf(stderr, "failed to load bitmap\n");
             }
         }
         return false;

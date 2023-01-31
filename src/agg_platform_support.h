@@ -463,30 +463,6 @@ namespace agg {
         // (depending on implementation)
         void message(const char* msg);
 
-        //--------------------------------------------------------------------
-        // Stopwatch functions. Function elapsed_time() returns time elapsed 
-        // since the latest start_timer() invocation in millisecods. 
-        // The resolutoin depends on the implementation. 
-        // In Win32 it uses QueryPerformanceFrequency() / QueryPerformanceCounter().
-        void   start_timer();
-        double elapsed_time() const;
-
-        //--------------------------------------------------------------------
-        // Get the full file name. In most cases it simply returns
-        // file_name. As it's appropriate in many systems if you open
-        // a file by its name without specifying the path, it tries to 
-        // open it in the current directory. The demos usually expect 
-        // all the supplementary files to be placed in the current 
-        // directory, that is usually coincides with the directory where
-        // the the executable is. However, in some systems (BeOS) it's not so. 
-        // For those kinds of systems full_file_name() can help access files 
-        // preserving commonly used policy.
-        // So, it's a good idea to use in the demos the following:
-        // FILE* fd = fopen(full_file_name("some.file"), "r"); 
-        // instead of
-        // FILE* fd = fopen("some.file", "r"); 
-        const char* full_file_name(const char* file_name);
-
     public:
         platform_specific* m_specific;
         ctrl_container m_ctrls;
