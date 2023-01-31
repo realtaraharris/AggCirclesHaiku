@@ -1,6 +1,8 @@
 #ifndef _CTRLCONTAINER_H_
 #define _CTRLCONTAINER_H_
 
+#include "ctrl/agg_ctrl.h"
+
 namespace agg {
     // ctrl_container
     // A helper class that contains pointers to a number of controls.

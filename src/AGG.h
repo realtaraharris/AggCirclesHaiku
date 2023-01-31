@@ -3,7 +3,6 @@
 
 #include "AGGApplication.h"
 #include <Application.h>
-#include "agg_platform_support.h"
 
 namespace agg {
     class platform_specific {

@@ -1,7 +1,10 @@
 #ifndef PLATFORMSUPPORT_H
 #define PLATFORMSUPPORT_H
 
+#include "agg_trans_viewport.h"
+
 #include "PixelFormats.h"
+#include "CtrlContainer.h"
 
 // platform_support
 // This class is a base one to the apllication classes. It can be used

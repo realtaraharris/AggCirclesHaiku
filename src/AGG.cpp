@@ -5,7 +5,6 @@
 #include <TranslationUtils.h>
 #include <Bitmap.h>
 
-#include "agg_platform_support.h"
 #include "AGG.h"
 #include "Util.h"
 #include "util/agg_color_conv_rgb8.h"
