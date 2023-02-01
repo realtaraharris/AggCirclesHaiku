@@ -10,7 +10,7 @@
 #include "util/agg_color_conv_rgb8.h"
 
 namespace agg {
-    PlatformSpecific::PlatformSpecific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y) : fAGG(agg), fApp(NULL), fFormat(format), fFlipY(flip_y), fTimerStart(system_time()) {
+    PlatformSpecific::PlatformSpecific(agg::PlatformSupport* agg, agg::pix_format_e format, bool flip_y) : fAGG(agg), fApp(NULL), fFormat(format), fFlipY(flip_y), fTimerStart(system_time()) {
         memset(fImages, 0, sizeof(fImages));
         fApp = new AGGApplication();
         fAppPath[0] = 0;
@@ -36,7 +36,7 @@ namespace agg {
     }
 
     PlatformSpecific::~PlatformSpecific() {
-        for (int32 i = 0; i < agg::platform_support::max_images; i++) {
+        for (int32 i = 0; i < agg::PlatformSupport::max_images; i++) {
             delete fImages[i];
         }
         delete fApp;
@@ -78,7 +78,7 @@ namespace agg {
         fApp->Window()->View()->Update();
     }
 
-    platform_support::platform_support(pix_format_e format, bool flip_y) :
+    PlatformSupport::PlatformSupport(pix_format_e format, bool flip_y) :
         m_specific(new PlatformSpecific(this, format, flip_y)),
         m_format(format),
         m_bpp(32/*m_specific->m_bpp*/),
@@ -87,17 +87,17 @@ namespace agg {
         m_initial_width(10),
         m_initial_height(10) { }
     
-    platform_support::~platform_support() {
+    PlatformSupport::~PlatformSupport() {
         delete m_specific;
     }
 
-    void* platform_support::raw_display_handler() {
+    void* PlatformSupport::raw_display_handler() {
         // TODO: if we ever support BDirectWindow here, that would
         // be the frame buffer pointer with offset to the window top left
         return NULL;
     }
 
-    bool platform_support::init(unsigned width, unsigned height, unsigned flags) {
+    bool PlatformSupport::init(unsigned width, unsigned height, unsigned flags) {
         m_initial_width = width;
         m_initial_height = height;
         m_window_flags = flags;
@@ -110,15 +110,15 @@ namespace agg {
         return false;
     }
     
-    int platform_support::run() {
+    int PlatformSupport::run() {
         return m_specific->Run();
     }
     
-    const char* platform_support::img_ext() const {
+    const char* PlatformSupport::img_ext() const {
         return ".ppm";
     }
 
-    bool platform_support::load_img(unsigned idx, const char* file) {
+    bool PlatformSupport::load_img(unsigned idx, const char* file) {
         if (idx < max_images) {
             char path[B_PATH_NAME_LENGTH];
             sprintf(path, "%s/%s%s", m_specific->fAppPath, file, img_ext());
@@ -233,12 +233,12 @@ namespace agg {
         return false;
     }
     
-    bool platform_support::save_img(unsigned idx, const char* file) {
+    bool PlatformSupport::save_img(unsigned idx, const char* file) {
         // TODO: implement using BTranslatorRoster and friends
         return false;
     }
     
-    bool platform_support::create_img(unsigned idx, unsigned width, unsigned height) {
+    bool PlatformSupport::create_img(unsigned idx, unsigned width, unsigned height) {
         if(idx < max_images) {
             if(width  == 0) {
                 width  = m_specific->fApp->Window()->View()->Bitmap()->Bounds().IntegerWidth() + 1;
@@ -259,21 +259,21 @@ namespace agg {
         return false;
     }
     
-    void platform_support::force_redraw() {
+    void PlatformSupport::force_redraw() {
         m_specific->ForceRedraw();
     }
     
-    void platform_support::update_window() {
+    void PlatformSupport::update_window() {
         m_specific->UpdateWindow();
     }
     
-    void platform_support::on_init() {}
-    void platform_support::on_resize(int sx, int sy) {}
-    void platform_support::on_idle() {}
-    void platform_support::on_mouse_move(int x, int y, unsigned flags) {}
-    void platform_support::on_mouse_button_down(int x, int y, unsigned flags) {}
-    void platform_support::on_mouse_button_up(int x, int y, unsigned flags) {}
-    void platform_support::on_ctrl_change() {}
-    void platform_support::on_draw() {}
-    void platform_support::on_post_draw(void* raw_handler) {}
+    void PlatformSupport::on_init() {}
+    void PlatformSupport::on_resize(int sx, int sy) {}
+    void PlatformSupport::on_idle() {}
+    void PlatformSupport::on_mouse_move(int x, int y, unsigned flags) {}
+    void PlatformSupport::on_mouse_button_down(int x, int y, unsigned flags) {}
+    void PlatformSupport::on_mouse_button_up(int x, int y, unsigned flags) {}
+    void PlatformSupport::on_ctrl_change() {}
+    void PlatformSupport::on_draw() {}
+    void PlatformSupport::on_post_draw(void* raw_handler) {}
 }

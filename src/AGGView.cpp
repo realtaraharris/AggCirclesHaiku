@@ -10,7 +10,7 @@ enum input_flag_e {
     mouse_right = 2,
 };
 
-AGGView::AGGView(BRect frame, agg::platform_support* agg, agg::pix_format_e format, bool flipY) : BView(frame, "AGG View", B_FOLLOW_ALL, B_FRAME_EVENTS | B_WILL_DRAW),
+AGGView::AGGView(BRect frame, agg::PlatformSupport* agg, agg::pix_format_e format, bool flipY) : BView(frame, "AGG View", B_FOLLOW_ALL, B_FRAME_EVENTS | B_WILL_DRAW),
     fFormat(format),
     fFlipY(flipY),
 

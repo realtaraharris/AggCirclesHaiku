@@ -44,7 +44,7 @@ double random_dbl(double start, double end) {
     return double(r) * (end - start) / 32768.0 + start;
 }
 
-class the_application : public agg::platform_support {
+class the_application : public agg::PlatformSupport {
     unsigned       m_num_points;
     scatter_point* m_points;
 
@@ -62,7 +62,7 @@ public:
     }
 
     the_application(agg::pix_format_e format, bool flip_y, unsigned num_points) :
-        agg::platform_support(format, flip_y),
+        agg::PlatformSupport(format, flip_y),
         m_num_points(num_points),
         m_points(new scatter_point [num_points]),
         m_scale_ctrl_z    (5, 5,  start_width-5, 12, !flip_y),

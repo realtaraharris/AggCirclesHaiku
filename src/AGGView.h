@@ -8,7 +8,7 @@
 
 class AGGView : public BView {
 public:
-    AGGView(BRect frame, agg::platform_support* agg, agg::pix_format_e format, bool flipY);
+    AGGView(BRect frame, agg::PlatformSupport* agg, agg::pix_format_e format, bool flipY);
     virtual                 ~AGGView();
 
     virtual void            AttachedToWindow();
@@ -36,7 +36,7 @@ private:
     agg::pix_format_e       fFormat;
     bool                    fFlipY;
 
-    agg::platform_support*  fAGG;
+    agg::PlatformSupport*  fAGG;
 
     uint32                  fMouseButtons;
     int32                   fMouseX;

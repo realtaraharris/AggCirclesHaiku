@@ -8,15 +8,15 @@
 
 #include "Predeclaration.h"
 
-// platform_support
+// PlatformSupport
 // This class is a base one to the apllication classes. It can be used
 // as follows:
 //
-//  class the_application : public agg::platform_support
+//  class the_application : public agg::PlatformSupport
 //  {
 //  public:
 //      the_application(unsigned bpp, bool flip_y) :
-//          platform_support(bpp, flip_y)
+//          PlatformSupport(bpp, flip_y)
 //      . . .
 //
 //      //override stuff . . .
@@ -68,14 +68,14 @@ namespace agg {
         window_keep_aspect_ratio = 4,
     };
 
-    class platform_support {
+    class PlatformSupport {
     public:
         enum max_images_e { max_images = 16 };
 
         // format - see enum pix_format_e {};
         // flip_y - true if you want to have the Y-axis flipped vertically.
-        platform_support(pix_format_e format, bool flip_y);
-        virtual ~platform_support();
+        PlatformSupport(pix_format_e format, bool flip_y);
+        virtual ~PlatformSupport();
 
         // These 3 methods handle working with images. The image
         // formats are the simplest ones, such as .BMP in Windows or 
@@ -176,7 +176,7 @@ namespace agg {
         // Adding control elements. A control element once added will be 
         // working and reacting to the mouse events. Still, you
         // will have to render them in the on_draw() using function 
-        // render_ctrl() because platform_support doesn't know anything about 
+        // render_ctrl() because PlatformSupport doesn't know anything about
         // renderers you use. The controls will be also scaled automatically 
         // if they provide a proper scaling mechanism (all the controls 
         // included into the basic AGG package do).
@@ -236,8 +236,8 @@ namespace agg {
         // data membders. See the implementations for different
         // platforms for details.
     private:
-        platform_support(const platform_support&);
-        const platform_support& operator = (const platform_support&);
+        PlatformSupport(const PlatformSupport&);
+        const PlatformSupport& operator = (const PlatformSupport&);
 
         pix_format_e     m_format;
         unsigned         m_bpp;

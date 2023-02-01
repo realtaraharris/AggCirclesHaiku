@@ -7,7 +7,7 @@
 namespace agg {
     class PlatformSpecific {
     public:
-        PlatformSpecific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y);
+        PlatformSpecific(agg::PlatformSupport* agg, agg::pix_format_e format, bool flip_y);
         ~PlatformSpecific();
         bool Init(int width, int height, unsigned flags);
         int Run();
@@ -17,12 +17,12 @@ namespace agg {
         void ForceRedraw();
         void UpdateWindow();
 
-        agg::platform_support* fAGG;
+        agg::PlatformSupport* fAGG;
         AGGApplication* fApp;
         agg::pix_format_e fFormat;
         bool fFlipY;
         bigtime_t fTimerStart;
-        BBitmap* fImages[agg::platform_support::max_images];
+        BBitmap* fImages[agg::PlatformSupport::max_images];
 
         char fAppPath[B_PATH_NAME_LENGTH];
         char fFilePath[B_PATH_NAME_LENGTH];
