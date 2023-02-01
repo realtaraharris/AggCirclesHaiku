@@ -1,19 +1,18 @@
-#ifndef CTRLCONTAINER_H
-#define CTRLCONTAINER_H
+#ifndef CONTROLCONTAINER_H
+#define CONTROLCONTAINER_H
 
 #include "ctrl/agg_ctrl.h"
 
 namespace agg {
-    // ctrl_container
     // A helper class that contains pointers to a number of controls.
     // This class is used to ease the event handling with controls.
     // The implementation should simply call the appropriate methods
     // of this class when appropriate events occur.
-    class ctrl_container {
+    class ControlContainer {
         enum max_ctrl_e { max_ctrl = 64 };
 
     public:
-        ctrl_container() : m_num_ctrl(0), m_cur_ctrl(-1) {}
+        ControlContainer() : m_num_ctrl(0), m_cur_ctrl(-1) {}
 
         void add(ctrl& c) {
             if(m_num_ctrl < max_ctrl) {
@@ -80,4 +79,4 @@ namespace agg {
     };
 }
 
-#endif // CTRLCONTAINER_H
+#endif // CONTROLCONTAINER_H

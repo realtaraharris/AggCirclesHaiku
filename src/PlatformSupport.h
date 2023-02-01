@@ -4,7 +4,7 @@
 #include "agg_trans_viewport.h"
 
 #include "PixelFormats.h"
-#include "CtrlContainer.h"
+#include "ControlContainer.h"
 
 #include "Predeclaration.h"
 
@@ -230,7 +230,7 @@ namespace agg {
         void* raw_display_handler();
 
         PlatformSpecific* m_specific;
-        ctrl_container m_ctrls;
+        ControlContainer m_ctrls;
 
         // Sorry, I'm too tired to describe the private 
         // data membders. See the implementations for different
