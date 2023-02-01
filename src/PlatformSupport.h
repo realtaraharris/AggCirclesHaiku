@@ -12,10 +12,10 @@
 // This class is a base one to the apllication classes. It can be used
 // as follows:
 //
-//  class the_application : public agg::PlatformSupport
+//  class Circles : public agg::PlatformSupport
 //  {
 //  public:
-//      the_application(unsigned bpp, bool flip_y) :
+//      Circles(unsigned bpp, bool flip_y) :
 //          PlatformSupport(bpp, flip_y)
 //      . . .
 //
@@ -42,7 +42,7 @@
 //
 //
 //  int agg_main(int argc, char* argv[]) {
-//      the_application app(pix_format_rgb24, true);
+//      Circles app(pix_format_rgb24, true);
 //
 //      if(app.init(500, 400, agg::window_resize)) {
 //          return app.run();
@@ -157,11 +157,11 @@ namespace agg {
         // Event handlers. They are not pure functions, so you don't have
         // to override them all.
         // In my demo applications these functions are defined inside
-        // the the_application class (implicit inlining) which is in general 
+        // the Circles class (implicit inlining) which is in general
         // very bad practice, I mean vitual inline methods. At least it does
         // not make sense. 
         // But in this case it's quite appropriate bacause we have the only
-        // instance of the the_application class and it is in the same file 
+        // instance of the Circles class and it is in the same file
         // where this class is defined.
         virtual void on_init();
         virtual void on_resize(int sx, int sy);

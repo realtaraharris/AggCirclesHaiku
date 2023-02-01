@@ -44,7 +44,7 @@ double random_dbl(double start, double end) {
     return double(r) * (end - start) / 32768.0 + start;
 }
 
-class the_application : public agg::PlatformSupport {
+class Circles : public agg::PlatformSupport {
     unsigned       m_num_points;
     scatter_point* m_points;
 
@@ -57,11 +57,11 @@ class the_application : public agg::PlatformSupport {
     agg::bspline m_spline_b;
 
 public:
-    virtual ~the_application() {
+    virtual ~Circles() {
         delete [] m_points;
     }
 
-    the_application(agg::pix_format_e format, bool flip_y, unsigned num_points) :
+    Circles(agg::pix_format_e format, bool flip_y, unsigned num_points) :
         agg::PlatformSupport(format, flip_y),
         m_num_points(num_points),
         m_points(new scatter_point [num_points]),
@@ -198,7 +198,7 @@ int main(int argc, char* argv[]) {
         if(num_points > 20000) num_points = 20000;
     }
 
-    the_application app(pix_format, flip_y, num_points);
+    Circles app(pix_format, flip_y, num_points);
 
     if(app.init(start_width, start_height, agg::window_resize | agg::window_keep_aspect_ratio)) {
         return app.run();
