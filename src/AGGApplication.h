@@ -9,7 +9,7 @@ class AGGApplication : public BApplication {
 public:
     AGGApplication();
     virtual void ReadyToRun();
-    virtual bool Init(agg::PlatformSupport* agg, int width, int height, agg::pix_format_e format, bool flipY, uint32 flags);
+    virtual bool Init(PlatformSupport* agg, int width, int height, pix_format_e format, bool flipY, uint32 flags);
     AGGWindow* Window() const;
 
 private:

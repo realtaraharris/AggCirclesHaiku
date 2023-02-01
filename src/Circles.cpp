@@ -44,7 +44,7 @@ double random_dbl(double start, double end) {
     return double(r) * (end - start) / 32768.0 + start;
 }
 
-class Circles : public agg::PlatformSupport {
+class Circles : public PlatformSupport {
     unsigned       m_num_points;
     scatter_point* m_points;
 
@@ -61,8 +61,8 @@ public:
         delete [] m_points;
     }
 
-    Circles(agg::pix_format_e format, bool flip_y, unsigned num_points) :
-        agg::PlatformSupport(format, flip_y),
+    Circles(pix_format_e format, bool flip_y, unsigned num_points) :
+        PlatformSupport(format, flip_y),
         m_num_points(num_points),
         m_points(new scatter_point [num_points]),
         m_scale_ctrl_z    (5, 5,  start_width-5, 12, !flip_y),
@@ -200,7 +200,7 @@ int main(int argc, char* argv[]) {
 
     Circles app(pix_format, flip_y, num_points);
 
-    if(app.init(start_width, start_height, agg::window_resize | agg::window_keep_aspect_ratio)) {
+    if(app.init(start_width, start_height, window_resize | window_keep_aspect_ratio)) {
         return app.run();
     }
     return 1;

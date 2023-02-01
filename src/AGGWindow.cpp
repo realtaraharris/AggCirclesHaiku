@@ -8,7 +8,7 @@ bool AGGWindow::QuitRequested() {
     return true;
 }
 
-bool AGGWindow::Init(BRect frame, agg::PlatformSupport* agg, agg::pix_format_e format, bool flipY, uint32 flags) {
+bool AGGWindow::Init(BRect frame, PlatformSupport* agg, pix_format_e format, bool flipY, uint32 flags) {
     MoveTo(frame.LeftTop());
     ResizeTo(frame.Width(), frame.Height());
 

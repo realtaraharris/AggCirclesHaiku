@@ -5,7 +5,6 @@
 #include "PlatformSupport.h"
 #include "Util.h"
 
-namespace agg {
 PlatformSupport::PlatformSupport(pix_format_e format, bool flip_y) :
     m_specific(new PlatformSpecific(this, format, flip_y)),
     m_format(format),
@@ -95,58 +94,58 @@ bool PlatformSupport::load_img(unsigned idx, const char* file) {
 
             delete m_specific->fImages[idx];
 
-            rendering_buffer rbuf_tmp;
+            agg::rendering_buffer rbuf_tmp;
             attach_buffer_to_BBitmap(rbuf_tmp, transBitmap, m_flip_y);
 
             m_specific->fImages[idx] = bitmap;
 
             attach_buffer_to_BBitmap(m_rbuf_img[idx], bitmap, m_flip_y);
 
-            rendering_buffer* dst = &m_rbuf_img[idx];
+            agg::rendering_buffer* dst = &m_rbuf_img[idx];
 
             switch(m_format) {
             case pix_format_gray8:
                 return false;
-                // color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_gray8()); break;
+                // color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_gray8()); break;
                 break;
 
             case pix_format_rgb555:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_rgb555());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_rgb555());
                 break;
                 break;
 
             case pix_format_rgb565:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_rgb565());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_rgb565());
                 break;
                 break;
 
             case pix_format_rgb24:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_rgb24());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_rgb24());
                 break;
                 break;
 
             case pix_format_bgr24:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_bgr24());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_bgr24());
                 break;
                 break;
 
             case pix_format_abgr32:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_abgr32());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_abgr32());
                 break;
                 break;
 
             case pix_format_argb32:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_argb32());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_argb32());
                 break;
                 break;
 
             case pix_format_bgra32:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_bgra32());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_bgra32());
                 break;
                 break;
 
             case pix_format_rgba32:
-                color_conv(dst, &rbuf_tmp, color_conv_bgra32_to_rgba32());
+                color_conv(dst, &rbuf_tmp, agg::color_conv_bgra32_to_rgba32());
                 break;
                 break;
             }
@@ -204,4 +203,3 @@ void PlatformSupport::on_mouse_button_up(int x, int y, unsigned flags) {}
 void PlatformSupport::on_ctrl_change() {}
 void PlatformSupport::on_draw() {}
 void PlatformSupport::on_post_draw(void* raw_handler) {}
-}

@@ -1,25 +1,25 @@
 #include "Util.h"
 
-color_space pix_format_to_color_space(agg::pix_format_e format) {
+color_space pix_format_to_color_space(pix_format_e format) {
     color_space bitmapFormat = B_NO_COLOR_SPACE;
     switch (format) {
-    case agg::pix_format_rgb555:
+    case pix_format_rgb555:
         bitmapFormat = B_RGB15;
         break;
 
-    case agg::pix_format_rgb565:
+    case pix_format_rgb565:
         bitmapFormat = B_RGB16;
         break;
 
-    case agg::pix_format_rgb24:
-    case agg::pix_format_bgr24:
+    case pix_format_rgb24:
+    case pix_format_bgr24:
         bitmapFormat = B_RGB24;
         break;
 
-    case agg::pix_format_rgba32:
-    case agg::pix_format_argb32:
-    case agg::pix_format_abgr32:
-    case agg::pix_format_bgra32:
+    case pix_format_rgba32:
+    case pix_format_argb32:
+    case pix_format_abgr32:
+    case pix_format_bgra32:
         bitmapFormat = B_RGBA32;
         break;
     }

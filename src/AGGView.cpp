@@ -10,7 +10,7 @@ enum input_flag_e {
     mouse_right = 2,
 };
 
-AGGView::AGGView(BRect frame, agg::PlatformSupport* agg, agg::pix_format_e format, bool flipY) : BView(frame, "AGG View", B_FOLLOW_ALL, B_FRAME_EVENTS | B_WILL_DRAW),
+AGGView::AGGView(BRect frame, PlatformSupport* agg, pix_format_e format, bool flipY) : BView(frame, "AGG View", B_FOLLOW_ALL, B_FRAME_EVENTS | B_WILL_DRAW),
     fFormat(format),
     fFlipY(flipY),
 
@@ -94,7 +94,7 @@ void AGGView::Draw(BRect updateRect) {
             fAGG->on_draw();
             fRedraw = false;
         }
-        if (fFormat == agg::pix_format_bgra32) {
+        if (fFormat == pix_format_bgra32) {
             DrawBitmap(fBitmap, updateRect, updateRect);
         } else {
             BBitmap* bitmap = new BBitmap(fBitmap->Bounds(), 0, B_RGBA32);
@@ -106,28 +106,28 @@ void AGGView::Draw(BRect updateRect) {
             attach_buffer_to_BBitmap(rbufDst, bitmap, false);
 
             switch(fFormat) {
-            case agg::pix_format_rgb555:
+            case pix_format_rgb555:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_rgb555_to_bgra32());
                 break;
-            case agg::pix_format_rgb565:
+            case pix_format_rgb565:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_rgb565_to_bgra32());
                 break;
-            case agg::pix_format_rgb24:
+            case pix_format_rgb24:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_rgb24_to_bgra32());
                 break;
-            case agg::pix_format_bgr24:
+            case pix_format_bgr24:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_bgr24_to_bgra32());
                 break;
-            case agg::pix_format_rgba32:
+            case pix_format_rgba32:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_rgba32_to_bgra32());
                 break;
-            case agg::pix_format_argb32:
+            case pix_format_argb32:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_argb32_to_bgra32());
                 break;
-            case agg::pix_format_abgr32:
+            case pix_format_abgr32:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_abgr32_to_bgra32());
                 break;
-            case agg::pix_format_bgra32:
+            case pix_format_bgra32:
                 agg::color_conv(&rbufDst, &rbufSrc, agg::color_conv_bgra32_to_bgra32());
                 break;
             }

@@ -12,10 +12,10 @@ void AGGApplication::ReadyToRun() {
     }
 }
 
-bool AGGApplication::Init(agg::PlatformSupport* agg, int width, int height, agg::pix_format_e format, bool flipY, uint32 flags) {
+bool AGGApplication::Init(PlatformSupport* agg, int width, int height, pix_format_e format, bool flipY, uint32 flags) {
     BRect r(50.0, 50.0, 50.0 + width - 1.0, 50.0 + height - 1.0);
     uint32 windowFlags = B_ASYNCHRONOUS_CONTROLS;
-    if (!(flags & agg::window_resize)) {
+    if (!(flags & window_resize)) {
         windowFlags |= B_NOT_RESIZABLE;
     }
     return fWindow->Init(r, agg, format, flipY, windowFlags);
