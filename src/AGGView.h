@@ -3,7 +3,6 @@
 
 #include <MessageRunner.h>
 #include <View.h>
-#include "agg_platform_support.h"
 
 #include "PlatformSupport.h"
 

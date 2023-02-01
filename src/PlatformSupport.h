@@ -6,6 +6,8 @@
 #include "PixelFormats.h"
 #include "CtrlContainer.h"
 
+#include "Predeclaration.h"
+
 // platform_support
 // This class is a base one to the apllication classes. It can be used
 // as follows:

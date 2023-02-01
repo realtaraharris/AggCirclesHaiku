@@ -10,9 +10,10 @@
 #include "agg_renderer_scanline.h"
 #include "ctrl/agg_slider_ctrl.h"
 #include "ctrl/agg_scale_ctrl.h"
-#include "agg_platform_support.h"
 #include "PixelFormats.h"
 #include "PlatformSupport.h"
+
+#include "Predeclaration.h"
 
 enum flip_y_e { flip_y = true };
 enum default_num_points_e { default_num_points = 10000 };
