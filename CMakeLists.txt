@@ -6,7 +6,7 @@ include_directories("/boot/system/develop/headers/agg2/")
 
 add_executable(AggCirclesHaiku
 	src/Circles.cpp
-	src/AGG.cpp
+	src/PlatformSpecific.cpp
 	src/AGGView.cpp
 	src/AGGWindow.cpp
 	src/AGGApplication.cpp

@@ -5,12 +5,12 @@
 #include <TranslationUtils.h>
 #include <Bitmap.h>
 
-#include "AGG.h"
+#include "PlatformSpecific.h"
 #include "Util.h"
 #include "util/agg_color_conv_rgb8.h"
 
 namespace agg {
-    platform_specific::platform_specific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y) : fAGG(agg), fApp(NULL), fFormat(format), fFlipY(flip_y), fTimerStart(system_time()) {
+    PlatformSpecific::PlatformSpecific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y) : fAGG(agg), fApp(NULL), fFormat(format), fFlipY(flip_y), fTimerStart(system_time()) {
         memset(fImages, 0, sizeof(fImages));
         fApp = new AGGApplication();
         fAppPath[0] = 0;
@@ -35,18 +35,18 @@ namespace agg {
         }
     }
 
-    platform_specific::~platform_specific() {
+    PlatformSpecific::~PlatformSpecific() {
         for (int32 i = 0; i < agg::platform_support::max_images; i++) {
             delete fImages[i];
         }
         delete fApp;
     }
 
-    bool platform_specific::Init(int width, int height, unsigned flags) {
+    bool PlatformSpecific::Init(int width, int height, unsigned flags) {
         return fApp->Init(fAGG, width, height, fFormat, fFlipY, flags);
     }
 
-    int platform_specific::Run() {
+    int PlatformSpecific::Run() {
         status_t ret = B_NO_INIT;
         if (fApp) {
             fApp->Run();
@@ -55,31 +55,31 @@ namespace agg {
         return ret;
     }
 
-    void platform_specific::SetTitle(const char* title) {
+    void PlatformSpecific::SetTitle(const char* title) {
         if (fApp && fApp->Window() && fApp->Window()->Lock()) {
             fApp->Window()->SetTitle(title);
             fApp->Window()->Unlock();
         }
     }
 
-    void platform_specific::StartTimer() {
+    void PlatformSpecific::StartTimer() {
         fTimerStart = system_time();
     }
 
-    double platform_specific::ElapsedTime() const {
+    double PlatformSpecific::ElapsedTime() const {
         return (system_time() - fTimerStart) / 1000.0;
     }
 
-    void platform_specific::ForceRedraw() {
+    void PlatformSpecific::ForceRedraw() {
         fApp->Window()->View()->ForceRedraw();
     }
 
-    void platform_specific::UpdateWindow() {
+    void PlatformSpecific::UpdateWindow() {
         fApp->Window()->View()->Update();
     }
 
     platform_support::platform_support(pix_format_e format, bool flip_y) :
-        m_specific(new platform_specific(this, format, flip_y)),
+        m_specific(new PlatformSpecific(this, format, flip_y)),
         m_format(format),
         m_bpp(32/*m_specific->m_bpp*/),
         m_window_flags(0),

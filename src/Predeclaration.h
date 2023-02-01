@@ -3,7 +3,7 @@
 
 namespace agg {
     // TODO: delete this garbage
-    class platform_specific;
+    class PlatformSpecific;
 }
 
 #endif // PREDECLARATION_H

@@ -1,14 +1,14 @@
-#ifndef AGG_H
-#define AGG_H
+#ifndef PLATFORMSPECIFIC_H
+#define PLATFORMSPECIFIC_H
 
 #include "AGGApplication.h"
 #include <Application.h>
 
 namespace agg {
-    class platform_specific {
+    class PlatformSpecific {
     public:
-        platform_specific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y);
-        ~platform_specific();
+        PlatformSpecific(agg::platform_support* agg, agg::pix_format_e format, bool flip_y);
+        ~PlatformSpecific();
         bool Init(int width, int height, unsigned flags);
         int Run();
         void SetTitle(const char* title);
@@ -29,4 +29,4 @@ namespace agg {
     };
 }
 
-#endif // AGG_H
+#endif // PLATFORMSPECIFIC_H

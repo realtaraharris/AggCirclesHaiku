@@ -229,7 +229,7 @@ namespace agg {
         // implementations you may have simply an unresolved symbol when linking.
         void* raw_display_handler();
 
-        platform_specific* m_specific;
+        PlatformSpecific* m_specific;
         ctrl_container m_ctrls;
 
         // Sorry, I'm too tired to describe the private 
