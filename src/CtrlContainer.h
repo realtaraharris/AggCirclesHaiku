@@ -1,5 +1,5 @@
-#ifndef _CTRLCONTAINER_H_
-#define _CTRLCONTAINER_H_
+#ifndef CTRLCONTAINER_H
+#define CTRLCONTAINER_H
 
 #include "ctrl/agg_ctrl.h"
 
@@ -80,4 +80,4 @@ namespace agg {
     };
 }
 
-#endif // _CTRLCONTAINER_H_
+#endif // CTRLCONTAINER_H

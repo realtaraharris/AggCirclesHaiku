@@ -1,5 +1,5 @@
-#ifndef PIXEL_FORMATS_INCLUDED
-#define PIXEL_FORMATS_INCLUDED
+#ifndef PIXELFORMATS_H
+#define PIXELFORMATS_H
 
 #define AGG_BGR24
 //#define AGG_RGB24
@@ -241,4 +241,4 @@ namespace agg {
     };
 }
 
-#endif // PIXEL_FORMATS_INCLUDED
+#endif // PIXELFORMATS_H
